@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Expense Tracker - Personal Finance Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Expense Management System</h1>
+            <p class="subtitle">Track your expenses and analyze your spending patterns</p>
+        </header>
+        
+        <nav class="tabs">
+            <button class="tab-button active" onclick="showTab('add-update')">Add/Update</button>
+            <button class="tab-button" onclick="showTab('analytics-category')">Analytics By Category</button>
+            <button class="tab-button" onclick="showTab('analytics-monthly')">Analytics By Months</button>
+        </nav>
+        
+        <!-- Add/Update Tab -->
+        <div id="add-update" class="tab-content active">
+            <div class="form-section">
+                <div class="date-selector">
+                    <label for="expense-date">Select Date:</label>
+                    <input type="date" id="expense-date" onchange="loadExpensesForDate()">
+                </div>
+                
+                <form id="expense-form">
+                    <div class="form-header">
+                        <div class="form-col">Amount</div>
+                        <div class="form-col">Category</div>
+                        <div class="form-col">Notes</div>
+                        <div class="form-col">Action</div>
+                    </div>
+                    
+                    <div id="expense-rows">
+                        <!-- Dynamic expense rows will be added here -->
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" onclick="addExpenseRow()">+ Add Row</button>
+                        <button type="submit">💾 Save Expenses</button>
+                    </div>
+                </form>
+                
+                <div id="expense-summary" class="summary-section">
+                    <h3>Daily Total: $<span id="daily-total">0.00</span></h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analytics By Category Tab -->
+        <div id="analytics-category" class="tab-content">
+            <div class="analytics-section">
+                <div class="date-range">
+                    <div class="date-input-group">
+                        <label for="start-date">Start Date:</label>
+                        <input type="date" id="start-date">
+                    </div>
+                    <div class="date-input-group">
+                        <label for="end-date">End Date:</label>
+                        <input type="date" id="end-date">
+                    </div>
+                    <button onclick="generateCategoryAnalytics()">📊 Get Analytics</button>
+                </div>
+                
+                <div id="category-results" class="results-section">
+                    <h3>Expense Breakdown By Category</h3>
+                    <div id="category-chart" class="chart-container"></div>
+                    <div id="category-table" class="table-container"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analytics By Months Tab -->
+        <div id="analytics-monthly" class="tab-content">
+            <div class="analytics-section">
+                <button onclick="generateMonthlyAnalytics()">📈 Generate Monthly Analytics</button>
+                
+                <div id="monthly-results" class="results-section">
+                    <h3>Expense Breakdown By Month</h3>
+                    <div id="monthly-chart" class="chart-container"></div>
+                    <div id="monthly-table" class="table-container"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Management -->
+        <div class="data-management">
+            <h3>Data Management</h3>
+            <div class="data-actions">
+                <button onclick="exportData()">📤 Export Data</button>
+                <button onclick="importData()">📥 Import Data</button>
+                <button onclick="clearAllData()" class="danger">🗑️ Clear All Data</button>
+            </div>
+            <input type="file" id="import-file" accept=".json" style="display: none;" onchange="handleFileImport(event)">
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2024 Expense Management System | Built with HTML, CSS & JavaScript | 
+        <a href="https://github.com/NMohanGandhi/expense-tracker-project" target="_blank">View on GitHub</a></p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
